@@ -1,7 +1,6 @@
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
 const express = require('express');
-// import ApolloServer
 const { ApolloServer } = require('apollo-server-express');
 
 // import our typeDefs and resolvers
