@@ -7,11 +7,12 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import Auth from '../utils/auth';
 
 
+
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
   const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [ login, {error}] = useMutation(LOGIN_USER)
+  const [ loginUser, {error}] = useMutation(LOGIN_USER)
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -29,19 +30,22 @@ const LoginForm = () => {
     }
 
     try {
-      const { response } = await login({
-        variables: { ...userFormData }
+      const response = await loginUser({
+        variables: { email: userFormData.email, password: userFormData.password }
       }) 
+      console.log(response)
 
-      if (!response.ok) {
+      if (!response.data.login) {
         throw new error('something went wrong!');
       }
 
-      const { token, user } = await response.json();
+      console.log(response.data.login)
+
+      const { login } = response.data;
+      const { token, user } = login
       console.log(user);
       Auth.login(token);
     } catch (err) {
-      console.error(err);
       setShowAlert(true);
     }
 
