@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import React, { useState } from 'react';
 import { Form, Button, Alert } from 'react-bootstrap';
-import { loginUser } from '../utils/API';
+// import { loginUser } from '../utils/API';
 import Auth from '../utils/auth';
 
 
@@ -29,12 +29,12 @@ const LoginForm = () => {
     }
 
     try {
-      const { data } = await login({
+      const { response } = await login({
         variables: { ...userFormData }
       }) 
 
       if (!response.ok) {
-        throw new Error('something went wrong!');
+        throw new error('something went wrong!');
       }
 
       const { token, user } = await response.json();
