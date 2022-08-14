@@ -33,6 +33,7 @@ mutation saveBook($input: BookInput!) {
           email
           bookCount
           savedBooks {
+            bookId
             authors
             description
             image
@@ -50,6 +51,7 @@ export const REMOVE_BOOK = gql`
           email
           bookCount
           savedBooks {
+            bookId
             authors
             description
             image
